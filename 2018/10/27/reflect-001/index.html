@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Java反射-类的加载概述和加载时机 | 高效率，慢生活</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="一、类的加载概述当程序要使用某个类时，如果该类还未被加载到内存中，则系统会通过加载、连接、初始化三步来实现对这个类进行初始化。  加载 将class文件读入内存，并为之创建一个Class对象。任何类被使用时系统都会建立一个Class对象   连接 验证 是否有正确的内部结构，并和其他类协调一致 准备 负责为类的静态成员分配内存，并设置默认初始化值 解析 将类的二进制数据中的符号引用替换为直接引用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java反射-类的加载概述和加载时机">
+<meta property="og:url" content="http://jianku.me/2018/10/27/reflect-001/index.html">
+<meta property="og:site_name" content="高效率，慢生活">
+<meta property="og:description" content="一、类的加载概述当程序要使用某个类时，如果该类还未被加载到内存中，则系统会通过加载、连接、初始化三步来实现对这个类进行初始化。  加载 将class文件读入内存，并为之创建一个Class对象。任何类被使用时系统都会建立一个Class对象   连接 验证 是否有正确的内部结构，并和其他类协调一致 准备 负责为类的静态成员分配内存，并设置默认初始化值 解析 将类的二进制数据中的符号引用替换为直接引用">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-10-27T15:29:35.271Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java反射-类的加载概述和加载时机">
+<meta name="twitter:description" content="一、类的加载概述当程序要使用某个类时，如果该类还未被加载到内存中，则系统会通过加载、连接、初始化三步来实现对这个类进行初始化。  加载 将class文件读入内存，并为之创建一个Class对象。任何类被使用时系统都会建立一个Class对象   连接 验证 是否有正确的内部结构，并和其他类协调一致 准备 负责为类的静态成员分配内存，并设置默认初始化值 解析 将类的二进制数据中的符号引用替换为直接引用">
+  
+    <link rel="alternative" href="/atom.xml" title="高效率，慢生活" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <div class="outer">
+        <section id="main"><article id="post-reflect-001" class="article article-type-post" itemscope itemprop="blogPost">
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Java反射-类的加载概述和加载时机
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2018/10/27/reflect-001/" class="article-date">
+  <time datetime="2018-10-27T15:17:18.000Z" itemprop="datePublished">2018-10-27</time>
+</a>
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="一、类的加载概述"><a href="#一、类的加载概述" class="headerlink" title="一、类的加载概述"></a>一、类的加载概述</h4><p>当程序要使用某个类时，如果该类还未被加载到内存中，则系统会通过加载、连接、初始化三步来实现对这个类进行初始化。</p>
+<ul>
+<li>加载<ul>
+<li>将class文件读入内存，并为之创建一个Class对象。任何类被使用时系统都会建立一个Class对象</li>
+</ul>
+</li>
+<li>连接<ul>
+<li>验证 是否有正确的内部结构，并和其他类协调一致</li>
+<li>准备 负责为类的静态成员分配内存，并设置默认初始化值</li>
+<li>解析 <code>将类的二进制数据中的符号引用替换为直接引用 todo</code></li>
+</ul>
+</li>
+<li>初始化<ul>
+<li>todo</li>
+</ul>
+</li>
+</ul>
+<h4 id="二、类的加载时机"><a href="#二、类的加载时机" class="headerlink" title="二、类的加载时机"></a>二、类的加载时机</h4><ul>
+<li>创建类的实例</li>
+<li>访问类的成员变量，或者为静态变量赋值</li>
+<li>使用类的静态方法</li>
+<li>试用反射方式来强制创建某个类或者接口对应的java.lang.Class对象</li>
+<li>初始化某个类的子类</li>
+<li>直接使用java.exe命令来允许某个主类</li>
+</ul>
+
+      
+
+      
+        
+    </div>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/10/27/reflect-002/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Java反射-类加载器概述和分类
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/10/23/java-constructor-0701/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Java构造方法</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        <aside id="sidebar">
+  <nav class="menus">
+  	<ul>
+  		<li><a href="/"><i class="icon icon-home"></i></a></li>
+  		
+			<li><a href="/archives"><i class="icon icon-fenlei"></i></a></li>
+  		
+  		
+			<li><a href="/tags"><i class="icon icon-tag"></i></a></li>
+  		
+  		
+  			<li><a href="https://github.com/hejianxian" target="_blank"><i class="icon icon-github"></i></a></li>
+  		
+  	</ul>
+  </nav>
+  <a id="go-top" href="#"><i class="icon icon-up"></i></a>
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+	<div id="footer-info" class="inner">
+	  &copy; 2019 iouhuan 
+	  - Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+	  - Theme <a href="https://github.com/hejianxian/hexo-theme-jane/" target="_blank">Jane</a>
+	</div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tag</a>
+  
+    <a href="https://github.com/hejianxian" class="mobile-nav-link">Github</a>
+  
+</nav>
+    
+
+<script src="//cdn.bootcss.com/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

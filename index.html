@@ -29,6 +29,252 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-summary-of-2018" class="article article-type-post" itemscope itemprop="blogPost">
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/02/summary-of-2018/">2018年总结，2019年愿望</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2019/01/02/summary-of-2018/" class="article-date">
+  <time datetime="2019-01-02T05:26:08.000Z" itemprop="datePublished">2019-01-02</time>
+</a>
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>###2018</p>
+<p>####家庭</p>
+<p>感谢老天给了我一个明大事、聪慧的老婆！</p>
+<p>楠芯慢慢会走路了， 会叫爸爸妈妈了。对于宝宝，就一个愿望：健康！</p>
+<p>因为过去几年的创业尝试，财富没有得到增长，甚至下滑。老婆也尝试了新的创收方式。</p>
+<p>爸爸妈妈的养老保险都全额买上了，想想以后老爹能有钱买烟抽，老妈有钱给她孙子孙女买糖买衣服，也就不觉得现在辛苦了。</p>
+<p>####工作</p>
+<h5 id="产品路"><a href="#产品路" class="headerlink" title="产品路"></a>产品路</h5><p>尝试培养去培养产品经理，把自己优化的工作方式授人以鱼。</p>
+<p>这里主要指的是工作方式， 和对业务、功能的思考方式。</p>
+<p>自己也深知离运营类产品经理有些距离，这方面暂时没有机会锻炼，也就没有去指导的机会了。</p>
+<p>结果：还不错，能迅速培养起来。</p>
+<p>#####技术路</p>
+<p>上面提到的产品方向，都是2013~2016的学习成果，20170718转了技术。</p>
+<p>2018收获最大的是：尝试带队完成了多语种的项目，其中包含技术栈：</p>
+<ul>
+<li><p>PHP、Python</p>
+</li>
+<li><p>Android、AWT</p>
+</li>
+<li>React全家桶</li>
+<li>Vue全家桶</li>
+<li>小程序</li>
+<li>C++客户端</li>
+<li>Android APP的逆向和PC客户端的逆向</li>
+</ul>
+<p>经常给团队开玩笑说，大家要有信心，我去年才重新回到技术这条路上，一样不带队完成这么大的项目。</p>
+<hr>
+<p>###2019</p>
+<h4 id="家庭"><a href="#家庭" class="headerlink" title="家庭"></a>家庭</h4><p>楠芯宝宝健康成长！</p>
+<p>期望老婆能有时间和金钱，对自己好一点！</p>
+<p>全家健康！全家运动！</p>
+<p>去一趟云南或者西藏旅游！</p>
+<p>####工作</p>
+<p>为了巩固自己技术这条路欠下的， 2019计划：</p>
+<ul>
+<li>深入理解Laravel、理解PHP内核</li>
+<li>Mysql内核理解及基于自身业务的优化</li>
+<li>深入理解Linux和Windows底层</li>
+<li>JAVA的SSH到微服务</li>
+<li>GO语言内核</li>
+<li>数据结构深入学习</li>
+<li>60个算法题</li>
+<li>建立当前阶段自己的团队管理理论体系</li>
+</ul>
+
+      
+
+      
+        
+    </div>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-reflect-003" class="article article-type-post" itemscope itemprop="blogPost">
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/10/27/reflect-003/">Java反射-反射概述</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2018/10/27/reflect-003/" class="article-date">
+  <time datetime="2018-10-27T15:40:51.000Z" itemprop="datePublished">2018-10-27</time>
+</a>
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="一、反射概述"><a href="#一、反射概述" class="headerlink" title="一、反射概述"></a>一、反射概述</h4><p>Java反射机制是在运行状态中</p>
+<ul>
+<li>对于任意一个类，都能够知道知道这个类的所有属性和方法</li>
+<li>对于任意一个对象，都能够调用它的任意一个方法和属性</li>
+<li>这种动态获取的信息以及动态调用对象的方法的功能称为Java语言的反射机制</li>
+<li>要想解剖一个类，必须先要获取到该类的字节码文件对象</li>
+<li>而解剖使用的就是Class类中的方法，所以先要获取到每个字节码文件对应的Class类型的对象</li>
+</ul>
+<h4 id="二、三种方式"><a href="#二、三种方式" class="headerlink" title="二、三种方式"></a>二、三种方式</h4><ul>
+<li>Class类中静态方法forName，读取配置文件</li>
+<li>Object类的静态属性class，锁对象</li>
+<li>Object类的getClass方法，判断两个对象是否同一个字节码文件</li>
+</ul>
+<h4 id="三、案例"><a href="#三、案例" class="headerlink" title="三、案例"></a>三、案例</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">package com.heima.bean;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Created by iouhuan on 2018/10/27.</span><br><span class="line"> */</span><br><span class="line">public class Person &#123;</span><br><span class="line">    private String name;</span><br><span class="line">    private int age;</span><br><span class="line"></span><br><span class="line">    public Person() &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">package com.heima.reflect;</span><br><span class="line"></span><br><span class="line">import com.heima.bean.Person;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Created by iouhuan on 2018/10/27.</span><br><span class="line"> */</span><br><span class="line">public class Demo1_Reflect &#123;</span><br><span class="line">    public static void main(String[] args) throws ClassNotFoundException &#123;</span><br><span class="line">        //Class类中静态方法forName</span><br><span class="line">        Class clazz1 = Class.forName(&quot;com.heima.bean.Person&quot;);</span><br><span class="line"></span><br><span class="line">        //Object类的静态属性class</span><br><span class="line">        Class clazz2 = Person.class;</span><br><span class="line"></span><br><span class="line">        //Object类的getClass方法</span><br><span class="line">        Person p = new Person();</span><br><span class="line">        Class clazz3 = p.getClass();</span><br><span class="line"></span><br><span class="line">        System.out.println(clazz1 == clazz2);</span><br><span class="line">        System.out.println(clazz2 == clazz3);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+        
+    </div>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-reflect-002" class="article article-type-post" itemscope itemprop="blogPost">
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/10/27/reflect-002/">Java反射-类加载器概述和分类</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2018/10/27/reflect-002/" class="article-date">
+  <time datetime="2018-10-27T15:30:36.000Z" itemprop="datePublished">2018-10-27</time>
+</a>
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="一、类加载器的概述"><a href="#一、类加载器的概述" class="headerlink" title="一、类加载器的概述"></a>一、类加载器的概述</h4><p>负责将.class文件加载到内存中，并为之生成对应的Class对象，虽然我不需要关心类加载机制，但是了解这个机制我们就能更好的理解程序的运行。</p>
+<h4 id="二、类加载器分类"><a href="#二、类加载器分类" class="headerlink" title="二、类加载器分类"></a>二、类加载器分类</h4><ul>
+<li>Bootstrap ClassLoader 根类加载器</li>
+<li>Extension ClassLoader 扩展类加载器</li>
+<li>System ClassLoader 系统类加载器</li>
+</ul>
+<h4 id="三、类加载器的作用"><a href="#三、类加载器的作用" class="headerlink" title="三、类加载器的作用"></a>三、类加载器的作用</h4><ul>
+<li>Bootstrap ClassLoader 根类加载器<ul>
+<li>也被称为引导类加载器，复制Java核心类的加载</li>
+<li>比如System,String等，在JDK中JRE的lib目录下rt.jar文件中</li>
+</ul>
+</li>
+<li>Extension ClassLoader 扩展类加载器<ul>
+<li>复制JRE的扩展目录中jar包的加载</li>
+<li>在JDK中JRE的lib目录下ext目录</li>
+</ul>
+</li>
+<li>System ClassLoader 系统类加载器<ul>
+<li>复制在JVM启动时加载来自Java明龙Class文件，以及ClassPath环境变量所指定的jar包和类路径。</li>
+</ul>
+</li>
+</ul>
+
+      
+
+      
+        
+    </div>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-reflect-001" class="article article-type-post" itemscope itemprop="blogPost">
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/10/27/reflect-001/">Java反射-类的加载概述和加载时机</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2018/10/27/reflect-001/" class="article-date">
+  <time datetime="2018-10-27T15:17:18.000Z" itemprop="datePublished">2018-10-27</time>
+</a>
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="一、类的加载概述"><a href="#一、类的加载概述" class="headerlink" title="一、类的加载概述"></a>一、类的加载概述</h4><p>当程序要使用某个类时，如果该类还未被加载到内存中，则系统会通过加载、连接、初始化三步来实现对这个类进行初始化。</p>
+<ul>
+<li>加载<ul>
+<li>将class文件读入内存，并为之创建一个Class对象。任何类被使用时系统都会建立一个Class对象</li>
+</ul>
+</li>
+<li>连接<ul>
+<li>验证 是否有正确的内部结构，并和其他类协调一致</li>
+<li>准备 负责为类的静态成员分配内存，并设置默认初始化值</li>
+<li>解析 <code>将类的二进制数据中的符号引用替换为直接引用 todo</code></li>
+</ul>
+</li>
+<li>初始化<ul>
+<li>todo</li>
+</ul>
+</li>
+</ul>
+<h4 id="二、类的加载时机"><a href="#二、类的加载时机" class="headerlink" title="二、类的加载时机"></a>二、类的加载时机</h4><ul>
+<li>创建类的实例</li>
+<li>访问类的成员变量，或者为静态变量赋值</li>
+<li>使用类的静态方法</li>
+<li>试用反射方式来强制创建某个类或者接口对应的java.lang.Class对象</li>
+<li>初始化某个类的子类</li>
+<li>直接使用java.exe命令来允许某个主类</li>
+</ul>
+
+      
+
+      
+        
+    </div>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-java-constructor-0701" class="article article-type-post" itemscope itemprop="blogPost">
   
   <div class="article-inner">
@@ -308,7 +554,7 @@
       <footer id="footer">
   
 	<div id="footer-info" class="inner">
-	  &copy; 2018 iouhuan 
+	  &copy; 2019 iouhuan 
 	  - Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
 	  - Theme <a href="https://github.com/hejianxian/hexo-theme-jane/" target="_blank">Jane</a>
 	</div>
