@@ -1,57 +1,180 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  <title>Java反射-类的加载概述和加载时机 | 高效率，慢生活</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一、类的加载概述当程序要使用某个类时，如果该类还未被加载到内存中，则系统会通过加载、连接、初始化三步来实现对这个类进行初始化。  加载 将class文件读入内存，并为之创建一个Class对象。任何类被使用时系统都会建立一个Class对象   连接 验证 是否有正确的内部结构，并和其他类协调一致 准备 负责为类的静态成员分配内存，并设置默认初始化值 解析 将类的二进制数据中的符号引用替换为直接引用">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Java反射-类的加载概述和加载时机">
-<meta property="og:url" content="http://jianku.me/2018/10/27/reflect-001/index.html">
-<meta property="og:site_name" content="高效率，慢生活">
-<meta property="og:description" content="一、类的加载概述当程序要使用某个类时，如果该类还未被加载到内存中，则系统会通过加载、连接、初始化三步来实现对这个类进行初始化。  加载 将class文件读入内存，并为之创建一个Class对象。任何类被使用时系统都会建立一个Class对象   连接 验证 是否有正确的内部结构，并和其他类协调一致 准备 负责为类的静态成员分配内存，并设置默认初始化值 解析 将类的二进制数据中的符号引用替换为直接引用">
-<meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-10-27T15:29:35.271Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java反射-类的加载概述和加载时机">
-<meta name="twitter:description" content="一、类的加载概述当程序要使用某个类时，如果该类还未被加载到内存中，则系统会通过加载、连接、初始化三步来实现对这个类进行初始化。  加载 将class文件读入内存，并为之创建一个Class对象。任何类被使用时系统都会建立一个Class对象   连接 验证 是否有正确的内部结构，并和其他类协调一致 准备 负责为类的静态成员分配内存，并设置默认初始化值 解析 将类的二进制数据中的符号引用替换为直接引用">
-  
-    <link rel="alternative" href="/atom.xml" title="高效率，慢生活" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  <link rel="stylesheet" href="/css/style.css">
+<html lang="">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="Java反射-类的加载概述和加载时机"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/default" title="高效率，慢生活">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.10.2" />
+
+
+
+<link rel="canonical" href="http://jianku.me/2018/10/27/reflect-001/"/>
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" />
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/nprogress/nprogress.min.css" />
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.10.2" />
+
+
+
   
 
-</head>
-<body>
-  <div id="container">
-    <div id="wrap">
-      <div class="outer">
-        <section id="main"><article id="post-reflect-001" class="article article-type-post" itemscope itemprop="blogPost">
-  
-  <div class="article-inner">
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+<script>
+  window.config = {"leancloud":{"app_id":null,"app_key":null},"toc":true,"fancybox":true,"pjax":true};
+</script>
+
+    <title> Java反射-类的加载概述和加载时机 - 高效率，慢生活 </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">高效率，慢生活</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
     
-      <header class="article-header">
-        
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            首页
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">高效率，慢生活</a>
+</div>
+
+<nav class="site-navbar">
   
-    <h1 class="article-title" itemprop="name">
-      Java反射-类的加载概述和加载时机
-    </h1>
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+    </ul>
   
+</nav>
 
       </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          Java反射-类的加载概述和加载时机
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2018-10-27
+        </span>
+        
+        
+      </div>
+    </header>
+
     
-    <div class="article-meta">
-      <a href="/2018/10/27/reflect-001/" class="article-date">
-  <time datetime="2018-10-27T15:17:18.000Z" itemprop="datePublished">2018-10-27</time>
-</a>
-      
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#一、类的加载概述"><span class="toc-text">一、类的加载概述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#二、类的加载时机"><span class="toc-text">二、类的加载时机</span></a></li></ol>
     </div>
-    <div class="article-entry" itemprop="articleBody">
+  </div>
+
+
+
+    <div class="post-content">
       
         <h4 id="一、类的加载概述"><a href="#一、类的加载概述" class="headerlink" title="一、类的加载概述"></a>一、类的加载概述</h4><p>当程序要使用某个类时，如果该类还未被加载到内存中，则系统会通过加载、连接、初始化三步来实现对这个类进行初始化。</p>
 <ul>
@@ -80,88 +203,194 @@
 </ul>
 
       
+    </div>
+
+    
+      
+      
+
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>原文作者: </span>
+      <a href="http://jianku.me">iouhuan</a>
+    </p>
+    <p class="copyright-item">
+      <span>原文链接: </span>
+      <a href="http://jianku.me/2018/10/27/reflect-001/">http://jianku.me/2018/10/27/reflect-001/</a>
+    </p>
+    <p class="copyright-item">
+      <span>许可协议: </span>
+      
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>
+    </p>
+  </div>
+
+
 
       
-        
-    </div>
-  </div>
-  
+      
     
-<nav id="article-nav">
-  
-    <a href="/2018/10/27/reflect-002/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
+
+    
+      <footer class="post-footer">
         
-          Java反射-类加载器概述和分类
         
-      </div>
-    </a>
-  
-  
-    <a href="/2018/10/23/java-constructor-0701/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Java构造方法</div>
-    </a>
-  
-</nav>
-
-  
-</article>
-
-
-</section>
-        <aside id="sidebar">
-  <nav class="menus">
-  	<ul>
-  		<li><a href="/"><i class="icon icon-home"></i></a></li>
-  		
-			<li><a href="/archives"><i class="icon icon-fenlei"></i></a></li>
-  		
-  		
-			<li><a href="/tags"><i class="icon icon-tag"></i></a></li>
-  		
-  		
-  			<li><a href="https://github.com/iouhuan" target="_blank"><i class="icon icon-github"></i></a></li>
-  		
-  	</ul>
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2018/10/27/reflect-002/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Java反射-类加载器概述和分类</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
+    
+    
+      <a class="next" href="/2018/10/23/java-constructor-0701/">
+        <span class="next-text nav-default">Java构造方法</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
   </nav>
-  <a id="go-top" href="#"><i class="icon icon-up"></i></a>
-</aside>
 
-      </div>
-      <footer id="footer">
-  
-	<div id="footer-info" class="inner">
-	  &copy; 2019 iouhuan 
-	  - Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-	  - Theme <a href="https://github.com/hejianxian/hexo-theme-jane/" target="_blank">Jane</a>
-	</div>
-</footer>
 
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-    <a href="/tags" class="mobile-nav-link">Tag</a>
-  
-    <a href="https://github.com/iouhuan" class="mobile-nav-link">Github</a>
-  
-</nav>
+      </footer>
     
 
-<script src="//cdn.bootcss.com/jquery/2.0.3/jquery.min.js"></script>
+  </article>
 
 
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  <script src="/fancybox/jquery.fancybox.pack.js"></script>
-
-
-<script src="/js/script.js"></script>
-
+          </div>
+          
+  <div class="comments" id="comments">
+    
   </div>
-</body>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/ahonn" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+
+    
+      
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2015 - 
+    
+    2019
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">iouhuan</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+  
+
+  
+
+
+
+    
+  
+
+
+
+  
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/pjax/jquery.pjax.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/nprogress/nprogress.min.js"></script>
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.10.2"></script>
+
+  </body>
 </html>
