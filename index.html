@@ -152,6 +152,57 @@
     <header class="post-header">
       <h1 class="post-title">
         
+          <a class="post-link" href="/2019/01/09/node-client-project-auto-deploy/">测试环境中Node项目实时自动部署或构建</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2019-01-09
+        </span>
+        
+        
+      </div>
+    </header>
+
+    
+    
+
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <blockquote>
+<p>项目中有多个前端项目，测试环境中：</p>
+<ul>
+<li>vue都用自动构建</li>
+<li>react因为构建时间太长，用webpack-dev，在nginx代理出来</li>
+</ul>
+</blockquote>
+<h4 id="一、需Build项目"><a href="#一、需Build项目" class="headerlink" title="一、需Build项目"></a>一、需Build项目</h4><p>方案：创建脚本，脚本内容：利用crontab，定时git pull，如果有内容变化，构建项目<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#yiye.公众号项目</span><br><span class="line">stonegarlicinfo=`cd /var/www/stonegarlic/ &amp;&amp; git pull`</span><br><span class="line">echo &quot;stonegarlic.git pull content is:&quot; $&#123;stonegarlicinfo&#125;</span><br><span class="line"></span><br><span class="line">if [ &quot;$stonegarlicinfo&quot; == &quot;Already up-to-date.&quot; ]</span><br><span class="line">then</span><br><span class="line">    echo &quot;stonegarlic.git change nothing&quot;</span><br><span class="line">else</span><br><span class="line">    `cd /var/www/stonegarlic/ &amp;&amp; npm run build`</span><br><span class="line">fi</span><br></pre></td></tr></table></figure></p>
+<p>如果代码没有更新，输出如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">stonegarlic.git pull content is: Already up-to-date.</span><br><span class="line">stonegarlic.git change nothing</span><br></pre></td></tr></table></figure></p>
+<p>如果有内容， 则npm run build</p>
+<h4 id="二、webpack-dev项目"><a href="#二、webpack-dev项目" class="headerlink" title="二、webpack-dev项目"></a>二、webpack-dev项目</h4><p>方案：利用screen开启screen session窗口，然后启动webpack-dev，保持常驻。代码利用crontab定时pull</p>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+      
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
           <a class="post-link" href="/2019/01/02/summary-of-2018/">2018年总结，2019年愿望</a>
         
       </h1>
