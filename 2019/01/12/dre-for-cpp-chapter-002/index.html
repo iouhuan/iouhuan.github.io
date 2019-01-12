@@ -17,10 +17,12 @@
 
 
 
-  <meta name="description" content="Java反射-类的加载概述和加载时机"/>
+  <meta name="description" content="C++反汇编与逆向分析(二)"/>
 
 
 
+
+  <meta name="keywords" content="逆向, C++, 高效率，慢生活" />
 
 
 
@@ -40,7 +42,7 @@
 
 
 
-<link rel="canonical" href="http://jianku.me/2018/10/27/reflect-001/"/>
+<link rel="canonical" href="http://jianku.me/2019/01/12/dre-for-cpp-chapter-002/"/>
 
 
 
@@ -88,7 +90,7 @@
   window.config = {"leancloud":{"app_id":null,"app_key":null},"toc":true,"fancybox":true,"pjax":true};
 </script>
 
-    <title> Java反射-类的加载概述和加载时机 - 高效率，慢生活 </title>
+    <title> C++反汇编与逆向分析(二) - 高效率，慢生活 </title>
   </head>
 
   <body><div id="mobile-navbar" class="mobile-navbar">
@@ -186,13 +188,13 @@
     <header class="post-header">
       <h1 class="post-title">
         
-          Java反射-类的加载概述和加载时机
+          C++反汇编与逆向分析(二)
         
       </h1>
 
       <div class="post-meta">
         <span class="post-time">
-          2018-10-27
+          2019-01-12
         </span>
         
         
@@ -204,7 +206,7 @@
   <div class="post-toc" id="post-toc">
     <h2 class="post-toc-title">文章目录</h2>
     <div class="post-toc-content">
-      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#一、类的加载概述"><span class="toc-text">一、类的加载概述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#二、类的加载时机"><span class="toc-text">二、类的加载时机</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-整数类型"><span class="toc-text">1. 整数类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-浮点数类型"><span class="toc-text">2. 浮点数类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-字符和字符串"><span class="toc-text">3. 字符和字符串</span></a></li></ol>
     </div>
   </div>
 
@@ -212,31 +214,71 @@
 
     <div class="post-content">
       
-        <h4 id="一、类的加载概述"><a href="#一、类的加载概述" class="headerlink" title="一、类的加载概述"></a>一、类的加载概述</h4><p>当程序要使用某个类时，如果该类还未被加载到内存中，则系统会通过加载、连接、初始化三步来实现对这个类进行初始化。</p>
+        <blockquote>
+<p>以下内容是《C++反汇编与逆向分析》第二章：基本数据类型的表现形式 读书笔记</p>
+</blockquote>
+<h4 id="1-整数类型"><a href="#1-整数类型" class="headerlink" title="1. 整数类型"></a>1. 整数类型</h4><p><strong>1.1 无符号整数</strong></p>
 <ul>
-<li>加载<ul>
-<li>将class文件读入内存，并为之创建一个Class对象。任何类被使用时系统都会建立一个Class对象</li>
+<li>占4个字节，由8个16位进制数组成，取值范围0x00000000 ~ 0xFFFFFFFF，表现为十进制0 ~ 4 294 967 295。</li>
+<li>存储时，如果不足32位，高位用0填充，直到占满4个字节。</li>
+<li>因为无符号，都是正数，所以都是真值存放，每一位都参与数据的表达，无符号整数表示的范围是补码的一倍。</li>
+</ul>
+<p><strong>1.2 有符号整数</strong></p>
+<ul>
+<li>最高位是符号位：0位整数，1位负数。表现为16进制时，最左侧的大于8时（&gt;1000），就是负数。</li>
+<li>负数是以补码的形式存放的：原码取反（符号位不变）+1，为什么要用补码存：因为计算机只会做加法。</li>
+<li>补码形式存储，取值范围0x80000000 ~ 0x7FFFFFFF，表现为十进制-2 147 483 648 ~ 2 147 483 647。</li>
+<li>为什么负数区间要比正数区间多一个最小值：0x80000000 可以表示为负数0，0x00000000也表示为0，于是把0x80000000表示为<code>(0x80000001 - 1)</code> ，其中0x80000001是0xFFFFFFFF的补码，0xFFFFFFFF是-2147483647，再减去1，就是-2147483648，也就是负数区间的最小值。</li>
+</ul>
+<p><br></p>
+<h4 id="2-浮点数类型"><a href="#2-浮点数类型" class="headerlink" title="2. 浮点数类型"></a>2. 浮点数类型</h4><p><strong>2.1 存储方式变迁</strong></p>
+<ul>
+<li>定点实数存储：约定整数位和小数位的长度</li>
+<li>浮点实数存储：指数域 + 数据域 + 符号域，以下以67.625举例<ul>
+<li>指数域：存储小数点的位置信息，-3(10的-3次方)</li>
+<li>数据域：没有小数点时的数据，67625</li>
+<li>符号域：正负信息，0</li>
 </ul>
 </li>
-<li>连接<ul>
-<li>验证 是否有正确的内部结构，并和其他类协调一致</li>
-<li>准备 负责为类的静态成员分配内存，并设置默认初始化值</li>
-<li>解析 <code>将类的二进制数据中的符号引用替换为直接引用 todo</code></li>
+<li>80286之后，提供了<code>浮点协处理器</code>，分担浮点运算。浮点数不会用通用寄存器，用到的是浮点寄存器</li>
+<li>C++中分float(单精度)和double(双精度),float占4字节，double是8字节</li>
+</ul>
+<p><strong>2.2 浮点数的编码方式</strong></p>
+<ul>
+<li><p>float类型的IEEE编码</p>
+<ul>
+<li>4个字节，第一位是符号位，第2~9位是指数位，其余23位是尾数位</li>
+<li>S=M*2^N 主要由三部分构成：符号位+阶码(N)+尾数(M)，其中M的整数部分必须大于1，存储时忽略这个1，只记录尾数部分<ul>
+<li>符号位：0表示正，1表示负</li>
+<li>阶码：这里阶码采用<code>移码</code>表示，对于float型数据其规定偏置量为127,阶码有正有负，对于8位二进制，则其表示范围为-128-127，double型规定为1023，其表示范围为-1024-1023。比如对于float型数据，若阶码的真实值为2，则加上127后为129，其阶码表示形式为10000010</li>
+<li>尾数:有效数字位，即部分二进制位(小数点后面的二进制位)，因为规定M的整数部分恒为1，所以这个1就不进行存储了。<code>尾数尾数不足时，低位补0填充</code></li>
 </ul>
 </li>
-<li>初始化<ul>
-<li>todo</li>
+<li>125二进制表示形式为1111101，小数部分表示为二进制为 1，则125.5二进制表示为1111101.1，由于规定尾数的整数部分恒为1，则表示为1.1111011*2^6，阶码为6，加上127为133，则表示为10000101，而对于尾数将整数部分1去掉，为1111011，在其后面补0使其位数达到23位，则为11110110000000000000000，则其二进制表示形式为0 10000101 11110110000000000000000</li>
+<li>0.5的二进制形式为0.1，由于规定正数部分必须为1，将小数点右移1位，则为1.0*2^(-1)，其阶码为-1+127=126，表示为01111110，而尾数1.0去掉整数部分为0，补齐0到23位00000000000000000000000，则其二进制表示形式为0 01111110 00000000000000000000000</li>
+<li>如果小数部分转换为2进制时得到一个<code>无穷值</code>，会根据尾数的长度舍弃多余部分，比如1.3实际存储的是1.2516582(00111111101001100110011001100110)</li>
+</ul>
+</li>
+<li><p>double类型的IEEE编码</p>
+<ul>
+<li>8个字节，第一位是符号位，第2~12位是指数位，其余42位是尾数位</li>
 </ul>
 </li>
 </ul>
-<h4 id="二、类的加载时机"><a href="#二、类的加载时机" class="headerlink" title="二、类的加载时机"></a>二、类的加载时机</h4><ul>
-<li>创建类的实例</li>
-<li>访问类的成员变量，或者为静态变量赋值</li>
-<li>使用类的静态方法</li>
-<li>试用反射方式来强制创建某个类或者接口对应的java.lang.Class对象</li>
-<li>初始化某个类的子类</li>
-<li>直接使用java.exe命令来允许某个主类</li>
+<p><strong>2.3 基本的浮点数</strong></p>
+<ul>
+<li>浮点数操作时通过浮点寄存器来实现的，普通数据的操作时试用通用寄存器，也就分布对应了两套不同的指令(汇编)。</li>
+<li>浮点寄存器是通过栈结构来实现的，操作都是顶部帧，所以浮点数指令集大部分都有<code>相同特点</code>（除开FADDP ST(N), ST），就是后面只有1个参数，从栈顶出来，或压入栈</li>
 </ul>
+<p><br></p>
+<h4 id="3-字符和字符串"><a href="#3-字符和字符串" class="headerlink" title="3. 字符和字符串"></a>3. 字符和字符串</h4><ul>
+<li></li>
+</ul>
+<ol start="4">
+<li>布尔类型</li>
+<li>地址、指针和引用</li>
+<li>常量</li>
+</ol>
 
       
     </div>
@@ -252,7 +294,7 @@
     </p>
     <p class="copyright-item">
       <span>原文链接: </span>
-      <a href="http://jianku.me/2018/10/27/reflect-001/">http://jianku.me/2018/10/27/reflect-001/</a>
+      <a href="http://jianku.me/2019/01/12/dre-for-cpp-chapter-002/">http://jianku.me/2019/01/12/dre-for-cpp-chapter-002/</a>
     </p>
     <p class="copyright-item">
       <span>许可协议: </span>
@@ -270,19 +312,19 @@
     
       <footer class="post-footer">
         
+          <div class="post-tags">
+            
+              <a href="/tags/逆向-C/">逆向, C++</a>
+            
+          </div>
+        
         
         
   <nav class="post-nav">
     
-      <a class="prev" href="/2018/10/27/reflect-002/">
-        <i class="iconfont icon-left"></i>
-        <span class="prev-text nav-default">Java反射-类加载器概述和分类</span>
-        <span class="prev-text nav-mobile">上一篇</span>
-      </a>
     
-    
-      <a class="next" href="/2018/10/23/java-constructor-0701/">
-        <span class="next-text nav-default">Java构造方法</span>
+      <a class="next" href="/2019/01/09/node-client-project-auto-deploy/">
+        <span class="next-text nav-default">测试环境中Node项目实时自动部署或构建</span>
         <span class="prev-text nav-mobile">下一篇</span>
         <i class="iconfont icon-right"></i>
       </a>

@@ -17,8 +17,6 @@
 
 
 
-  <meta name="description" content="Java反射-类的加载概述和加载时机"/>
-
 
 
 
@@ -40,7 +38,7 @@
 
 
 
-<link rel="canonical" href="http://jianku.me/2018/10/27/reflect-001/"/>
+<link rel="canonical" href="http://jianku.me/page/2/"/>
 
 
 
@@ -88,7 +86,7 @@
   window.config = {"leancloud":{"app_id":null,"app_key":null},"toc":true,"fancybox":true,"pjax":true};
 </script>
 
-    <title> Java反射-类的加载概述和加载时机 - 高效率，慢生活 </title>
+    <title> 高效率，慢生活 </title>
   </head>
 
   <body><div id="mobile-navbar" class="mobile-navbar">
@@ -182,17 +180,21 @@
           <div id="content" class="content">
             
   
+  <section id="posts" class="posts">
+    
+      
+        
   <article class="post">
     <header class="post-header">
       <h1 class="post-title">
         
-          Java反射-类的加载概述和加载时机
+          <a class="post-link" href="/2018/10/07/hello-world/">Hello World</a>
         
       </h1>
 
       <div class="post-meta">
         <span class="post-time">
-          2018-10-27
+          2018-10-07
         </span>
         
         
@@ -201,107 +203,52 @@
 
     
     
-  <div class="post-toc" id="post-toc">
-    <h2 class="post-toc-title">文章目录</h2>
-    <div class="post-toc-content">
-      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#一、类的加载概述"><span class="toc-text">一、类的加载概述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#二、类的加载时机"><span class="toc-text">二、类的加载时机</span></a></li></ol>
-    </div>
-  </div>
-
 
 
     <div class="post-content">
       
-        <h4 id="一、类的加载概述"><a href="#一、类的加载概述" class="headerlink" title="一、类的加载概述"></a>一、类的加载概述</h4><p>当程序要使用某个类时，如果该类还未被加载到内存中，则系统会通过加载、连接、初始化三步来实现对这个类进行初始化。</p>
-<ul>
-<li>加载<ul>
-<li>将class文件读入内存，并为之创建一个Class对象。任何类被使用时系统都会建立一个Class对象</li>
-</ul>
-</li>
-<li>连接<ul>
-<li>验证 是否有正确的内部结构，并和其他类协调一致</li>
-<li>准备 负责为类的静态成员分配内存，并设置默认初始化值</li>
-<li>解析 <code>将类的二进制数据中的符号引用替换为直接引用 todo</code></li>
-</ul>
-</li>
-<li>初始化<ul>
-<li>todo</li>
-</ul>
-</li>
-</ul>
-<h4 id="二、类的加载时机"><a href="#二、类的加载时机" class="headerlink" title="二、类的加载时机"></a>二、类的加载时机</h4><ul>
-<li>创建类的实例</li>
-<li>访问类的成员变量，或者为静态变量赋值</li>
-<li>使用类的静态方法</li>
-<li>试用反射方式来强制创建某个类或者接口对应的java.lang.Class对象</li>
-<li>初始化某个类的子类</li>
-<li>直接使用java.exe命令来允许某个主类</li>
-</ul>
+        
+        
 
+        
+          <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+
+        
       
     </div>
 
     
-      
-      
 
-  <div class="post-copyright">
-    <p class="copyright-item">
-      <span>原文作者: </span>
-      <a href="http://jianku.me">iouhuan</a>
-    </p>
-    <p class="copyright-item">
-      <span>原文链接: </span>
-      <a href="http://jianku.me/2018/10/27/reflect-001/">http://jianku.me/2018/10/27/reflect-001/</a>
-    </p>
-    <p class="copyright-item">
-      <span>许可协议: </span>
-      
-      <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>
-    </p>
-  </div>
-
-
-
-      
-      
-    
-
-    
-      <footer class="post-footer">
-        
-        
-        
-  <nav class="post-nav">
-    
-      <a class="prev" href="/2018/10/27/reflect-002/">
-        <i class="iconfont icon-left"></i>
-        <span class="prev-text nav-default">Java反射-类加载器概述和分类</span>
-        <span class="prev-text nav-mobile">上一篇</span>
-      </a>
-    
-    
-      <a class="next" href="/2018/10/23/java-constructor-0701/">
-        <span class="next-text nav-default">Java构造方法</span>
-        <span class="prev-text nav-mobile">下一篇</span>
-        <i class="iconfont icon-right"></i>
-      </a>
-    
-  </nav>
-
-
-      </footer>
     
 
   </article>
 
+      
+      
+  <nav class="pagination">
+    
+      <a class="prev" href="/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text">上一页</span>
+      </a>
+    
+    
+  </nav>
+
+
+    
+  </section>
 
           </div>
           
-  <div class="comments" id="comments">
-    
-  </div>
-
 
         </div>
       </main>
@@ -379,11 +326,6 @@
     </div>
 
     
-  
-  
-
-  
-
 
 
     
